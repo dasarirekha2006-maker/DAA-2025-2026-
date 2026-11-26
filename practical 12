@@ -1,0 +1,38 @@
+
+#include <stdio.h>
+#define INF 999
+
+int main() {
+    int a[4][4] = {
+        {0, 10, 15, 20},
+        {10, 0, 35, 25},
+        {15, 35, 0, 30},
+        {20, 25, 30, 0}
+    };
+
+    int visited[4] = {1, 0, 0, 0};
+    int city = 0, cost = 0, min, next;
+    int i, count;
+
+    printf("Path: 0 ");
+
+    for(count = 0; count < 3; count++) {
+        min = INF;
+
+        for(i = 0; i < 4; i++)
+            if(!visited[i] && a[city][i] < min) {
+                min = a[city][i];
+                next = i;
+            }
+
+        cost += min;
+        city = next;
+        visited[city] = 1;
+        printf("-> %d ", city);
+    }
+
+    cost += a[city][0];
+    printf("-> 0\nMinimum Cost = %d", cost);
+
+    return 0;
+}
