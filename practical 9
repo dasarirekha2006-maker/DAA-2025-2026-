@@ -1,0 +1,37 @@
+
+#include <stdio.h>
+#define INF 999
+
+int main() {
+    int a[5][5] = {
+        {0, 2, 0, 6, 0},
+        {2, 0, 3, 8, 5},
+        {0, 3, 0, 0, 7},
+        {6, 8, 0, 0, 9},
+        {0, 5, 7, 9, 0}
+    };
+
+    int v[5] = {0}, i, j, min, x, y, cost = 0;
+
+    v[0] = 1;
+
+    for(i = 0; i < 4; i++) {
+        min = INF;
+
+        for(j = 0; j < 5; j++)
+            if(v[j])
+                for(int k = 0; k < 5; k++)
+                    if(!v[k] && a[j][k] && a[j][k] < min) {
+                        min = a[j][k];
+                        x = j;
+                        y = k;
+                    }
+
+        printf("%d - %d : %d\n", x, y, min);
+        cost += min;
+        v[y] = 1;
+    }
+
+    printf("Minimum Cost = %d", cost);
+    return 0;
+}
