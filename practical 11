@@ -1,0 +1,30 @@
+
+#include <stdio.h>
+#define INF 999
+
+int main() {
+    int a[4][4] = {
+        {0, 5, INF, 10},
+        {INF, 0, 3, INF},
+        {INF, INF, 0, 1},
+        {INF, INF, INF, 0}
+    };
+
+    int i, j, k;
+
+    for(k = 0; k < 4; k++)
+        for(i = 0; i < 4; i++)
+            for(j = 0; j < 4; j++)
+                if(a[i][k] + a[k][j] < a[i][j])
+                    a[i][j] = a[i][k] + a[k][j];
+
+    printf("Shortest Distance Matrix:\n");
+
+    for(i = 0; i < 4; i++) {
+        for(j = 0; j < 4; j++)
+            printf("%d ", a[i][j]);
+        printf("\n");
+    }
+
+    return 0;
+}
